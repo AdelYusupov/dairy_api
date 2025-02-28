@@ -19,3 +19,10 @@ func (entry *Entry) Save() (*Entry, error) {
 
 	return entry, nil
 }
+func (entry *Entry) Delete() (*Entry, error) {
+	err := database.Database.Delete(&entry).Error
+	if err != nil {
+		return entry, nil
+	}
+	return entry, nil
+}

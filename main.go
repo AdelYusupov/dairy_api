@@ -38,7 +38,13 @@ func serveApplication() {
 	protectedRoutes.Use(middleware.JWTAuthMiddleware())
 	protectedRoutes.POST("/entry", controller.AddEntry)
 	protectedRoutes.GET("/entry", controller.GetAllEntry)
+	protectedRoutes.DELETE("/entry/:id", controller.DeleteEntry)
+	protectedRoutes.PUT("/entry/:id", controller.UpdateEntry)
 
+	privateRoutes := router.Group("/account")
+	privateRoutes.Use(middleware.JWTAuthMiddleware())
+	privateRoutes.PUT("/user", controller.UpdateUser)
+	privateRoutes.DELETE("/user", controller.DeleteUser)
 	router.Run(":8080")
 	fmt.Println("Server 8080 succ running")
 }
